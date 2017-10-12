@@ -1,5 +1,7 @@
 ## A simple Javascript spinner
 
+&#128279; https://blaizard.github.io/irspinner
+
 ## Features
 
 * Verical or horizontal
