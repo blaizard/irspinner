@@ -26,9 +26,9 @@
 #	minify_main: OUTPUT := hello.min.js
 
 process-stamp_irspinner: INPUT := srcs/jquery.irspinner.js
-process-stamp_irspinner: OUTPUT := jquery.irspinner.min.js
+process-stamp_irspinner: OUTPUT := ../docs/dist/jquery.irspinner.min.js
 
 process-stamp_irspinnercss: INPUT := srcs/jquery.irspinner.css
-process-stamp_irspinnercss: OUTPUT := jquery.irspinner.min.css
+process-stamp_irspinnercss: OUTPUT := ../docs/dist/jquery.irspinner.min.css
 
 STAMP_TXT := irSpinner $(OUTPUT) (`date +'%Y.%m.%d'`) by Blaise Lengrand
