@@ -1,4 +1,4 @@
-## A simple JacaScript spinner
+## A simple Javascript spinner
 
 ## Features
 
