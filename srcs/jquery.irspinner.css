@@ -1,0 +1,40 @@
+.irSpinner {
+	overflow: hidden;
+}
+
+.irSpinner ul {
+	display: block;
+	position: relative;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.irSpinner ul > li {
+	margin: 0;
+	padding: 10px 10px;
+	cursor: pointer;
+	font-size: 32px;
+}
+
+.irSpinner ul.vertical {
+	transition: top 1s ease-out;
+}
+
+.irSpinner ul.horizontal {
+	transition: left 1s ease-out;
+	white-space: nowrap;
+}
+
+.irSpinner ul.vertical > li {
+	border-bottom: 1px solid #222;
+}
+
+.irSpinner ul.horizontal > li {
+	display: inline-block;
+}
+
+.irSpinner ul > li.selected {
+	background: #000;
+	color: #fff;
+}

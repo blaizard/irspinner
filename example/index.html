@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../srcs/jquery.irspinner.js"></script>
+		<link rel="stylesheet" href="../srcs/jquery.irspinner.css">
+	</head>
+	<body>
+		<h1>Vertical Spinner</h1>
+		<div id="vertical-spinner" style="width: 300px; height: 100px; border: 1px solid black;"></div>
+
+		<h1>Horizontal Spinner</h1>
+		<div id="horizontal-spinner" style="width: 300px; border: 1px solid black;"></div>
+
+		<script>
+			$("#vertical-spinner").irSpinner({
+				list: ["New York", "Paris", "Berlin", "Shanghai"]
+			});
+
+			$("#horizontal-spinner").irSpinner({
+				list: ["New York", "Paris", "Berlin", "Shanghai"],
+				vertical: false
+			});
+		</script>
+	</body>
+</html>
