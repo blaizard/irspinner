@@ -4,3 +4,5 @@
 
 * Verical or horizontal
 * Work with mouse and touch events
+
+## &#10003; Try the [examples](examples)
