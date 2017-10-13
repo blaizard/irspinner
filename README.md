@@ -4,8 +4,10 @@
 
 ## Features
 
-* Verical or horizontal
+* Verical or horizontal scrolling
 * Compatible with touch
-* Support items with variable sizes
+* Support variable size items
+* Remote select, previous and next
+* Auto redraw for asynchronous loading
 
 ## &#10003; Try the [examples](https://blaizard.github.io/irspinner/)

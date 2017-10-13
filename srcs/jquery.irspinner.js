@@ -59,6 +59,18 @@
 		case "create":
 			$.fn.irSpinner.create.call(this);
 			break;
+		case "resize":
+			$.fn.irSpinner.select.call(this, options.index, /*force*/data);
+			break;
+		case "previous":
+			$.fn.irSpinner.select.call(this, options.index - 1);
+			break;
+		case "next":
+			$.fn.irSpinner.select.call(this, options.index + 1);
+			break;
+		case "select":
+			$.fn.irSpinner.select.call(this, data);
+			break;
 		};
 	};
 
@@ -128,14 +140,19 @@
 		// Build the list of elements
 		var list = options["list"];
 		var newList = [];
+		var index = 0;
 		for (var name in list) {
 			var item = $("<li>");
 			var value = ($.isArray(list)) ? list[name] : name;
 			newList.push(value);
 			$(item).data("value", value);
+			$(item).data("index", index++);
 			$(item).html(list[name]);
 			$(item).on("click touch", function() {
-				$(obj).val($(this).data("value")).trigger("change");
+				if (!$(obj).data("hasMoved")) {
+					$(obj).irSpinner("select", $(this).data("index"));
+				}
+				//$(obj).val($(this).data("value")).trigger("change");
 				// Stop event handlers
 				$(document).off("mouseup touchend", $.fn.irSpinner.stopScrollingEvent);
 				$(document).off("mousemove", $.fn.irSpinner.onMouseScrollingEvent);
@@ -154,9 +171,9 @@
 
 		// Select the first element by default
 		$.fn.irSpinner.select.call(obj, 0);
-		setTimeout(function() {
-			$.fn.irSpinner.select.call(obj, 0, /*force*/true);
-		}, 1);
+		$(body).find("img").on("load", function() {
+			$(obj).irSpinner("resize", /*force*/true);
+		});
 
 		$(this).on("mousedown touchstart", obj, function(e) {
 			var obj = e.data;
@@ -167,12 +184,17 @@
 			var initialPosition = ((isVertical) ? (e.pageY || e.originalEvent.touches[0].pageY) : (e.pageX || e.originalEvent.touches[0].pageX));
 			var prevDelta = 0;
 
+			$(obj).data("hasMoved", false);
+
 			var setPositionFromDelta = function(obj, delta) {
 				if (Math.abs(prevDelta) < itemSize / 4) {
 					return;
 				}
-				var newIndex = Math.round(delta / itemSize);
-				$.fn.irSpinner.select.call(obj, initialIndex - newIndex);
+				var deltaIndex = Math.round(delta / itemSize);
+				if (deltaIndex != 0) {
+					$(obj).data("hasMoved", true);
+				}
+				$.fn.irSpinner.select.call(obj, initialIndex - deltaIndex);
 			};
 
 			var timeStartMs = performance.now();

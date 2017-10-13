@@ -12,13 +12,16 @@
 
 .irSpinner ul > li {
 	margin: 0;
-	padding: 10px 10px;
 	cursor: pointer;
 	font-size: 32px;
 }
 
 .irSpinner ul.vertical {
 	transition: top 1s ease-out;
+}
+
+.irSpinner ul.vertical > li {
+	padding: 5px 10px;
 }
 
 .irSpinner ul.horizontal {
@@ -28,9 +31,17 @@
 
 .irSpinner ul.horizontal > li {
 	display: inline-block;
+	padding: 10px 5px;
+}
+
+.irSpinner ul > li {
+	opacity: 0.4;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .irSpinner ul > li.selected {
-	background: #000;
-	color: #fff;
+	opacity: 1;
 }

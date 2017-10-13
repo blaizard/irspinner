@@ -18,6 +18,11 @@
 		<h2>Embedding HTML</h2>
 		<div id="html-spinner" style="width: 600px; border: 1px solid black;"></div>
 
+		<h2>Previous/Next</h2>
+		<button type="button" onclick="javascript:$('#prevnext-spinner').irSpinner('previous');">Previous</button>
+		<div id="prevnext-spinner" style="display: inline-block; width: 300px; border: 1px solid black;"></div>
+		<button type="button" onclick="javascript:$('#prevnext-spinner').irSpinner('next');">Next</button>
+
 		<script>
 			$("#vertical-spinner").irSpinner({
 				list: ["New York", "Paris", "Berlin", "Shanghai"]
@@ -30,6 +35,11 @@
 
 			$("#html-spinner").irSpinner({
 				list: ["<img src=\"imgs/fire.jpg\">", "<img src=\"imgs/boat.jpg\">", "<img src=\"imgs/tiger.jpg\">", "<img src=\"imgs/peppers.jpg\">", "<img src=\"imgs/cello.jpg\">"],
+				vertical: false
+			});
+
+			$("#prevnext-spinner").irSpinner({
+				list: ["New York", "Paris", "Berlin", "Shanghai"],
 				vertical: false
 			});
 		</script>
