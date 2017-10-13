@@ -26,10 +26,6 @@
 	white-space: nowrap;
 }
 
-.irSpinner ul.vertical > li {
-	border-bottom: 1px solid #222;
-}
-
 .irSpinner ul.horizontal > li {
 	display: inline-block;
 }
