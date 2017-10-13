@@ -5,6 +5,7 @@
 ## Features
 
 * Verical or horizontal
-* Work with mouse and touch events
+* Compatible with touch
+* Support items with variable sizes
 
 ## &#10003; Try the [examples](https://blaizard.github.io/irspinner/)

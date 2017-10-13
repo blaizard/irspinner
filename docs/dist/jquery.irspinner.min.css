@@ -1,4 +1,4 @@
-/* irSpinner dist/../docs/dist/jquery.irspinner.min.css (2017.10.12) by Blaise Lengrand */
+/* irSpinner dist/../docs/dist/jquery.irspinner.min.css (2017.10.13) by Blaise Lengrand */
 .irSpinner {
 	overflow: hidden;
 }
@@ -25,10 +25,6 @@
 .irSpinner ul.horizontal {
 	transition: left 1s ease-out;
 	white-space: nowrap;
-}
-
-.irSpinner ul.vertical > li {
-	border-bottom: 1px solid #222;
 }
 
 .irSpinner ul.horizontal > li {
