@@ -1,0 +1,10 @@
+<h2>Vertical</h2>
+<div id="vertical-spinner" style="width: 300px; height: 100px; border: 1px solid black;"></div>
+
+<script type="text/javascript">
+	irRequire(["jQuery", "$().irSpinner"], function() {
+		$("#vertical-spinner").irSpinner({
+			list: ["New York", "Paris", "Berlin", "Shanghai"]
+		});
+	});
+</script>

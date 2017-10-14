@@ -1,0 +1,11 @@
+<h2>Horizontal</h2>
+<div id="horizontal-spinner" style="width: 300px; border: 1px solid black;"></div>
+
+<script>
+	irRequire(["jQuery", "$().irSpinner"], function() {
+		$("#horizontal-spinner").irSpinner({
+			list: ["New York", "Paris", "Berlin", "Shanghai"],
+			vertical: false
+		});
+	});
+</script>

@@ -1,46 +1,31 @@
+<!doctype html>
 <html>
 	<head>
-		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="dist/jquery.irspinner.min.js"></script>
-		<link rel="stylesheet" href="dist/jquery.irspinner.min.css">
-		<!--<script type="text/javascript" src="../srcs/jquery.irspinner.js"></script>
-		<link rel="stylesheet" href="../srcs/jquery.irspinner.css">//-->
+		<title>Documentation</title>
+		<meta name="description" content="Documentation"/>
+		<meta charset="utf-8"/>
+
+		<link href="doc-internal/style.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="doc-internal/irrequire.min.js"></script>
+		<script type="text/javascript" src="doc-internal/utils.js"></script>
 	</head>
 	<body>
-		<h1>irSpinner</h1>
+		<div class="doc-wrap">
+			<div class="doc-menu">
+				<h1 id="doc-title"></h1>
+				<ul id="doc-menu"></ul>
+				<div id="doc-github"></div>
+				<div id="doc-download"></div>
+			</div>
+			<div class="doc-content"><div id="doc-body"></div></div>
+		</div>
 
-		<h2>Vertical</h2>
-		<div id="vertical-spinner" style="width: 300px; height: 100px; border: 1px solid black;"></div>
-
-		<h2>Horizontal</h2>
-		<div id="horizontal-spinner" style="width: 300px; border: 1px solid black;"></div>
-
-		<h2>Embedding HTML</h2>
-		<div id="html-spinner" style="width: 600px; border: 1px solid black;"></div>
-
-		<h2>Previous/Next</h2>
-		<button type="button" onclick="javascript:$('#prevnext-spinner').irSpinner('previous');">Previous</button>
-		<div id="prevnext-spinner" style="display: inline-block; width: 300px; border: 1px solid black;"></div>
-		<button type="button" onclick="javascript:$('#prevnext-spinner').irSpinner('next');">Next</button>
-
-		<script>
-			$("#vertical-spinner").irSpinner({
-				list: ["New York", "Paris", "Berlin", "Shanghai"]
-			});
-
-			$("#horizontal-spinner").irSpinner({
-				list: ["New York", "Paris", "Berlin", "Shanghai"],
-				vertical: false
-			});
-
-			$("#html-spinner").irSpinner({
-				list: ["<img src=\"imgs/fire.jpg\">", "<img src=\"imgs/boat.jpg\">", "<img src=\"imgs/tiger.jpg\">", "<img src=\"imgs/peppers.jpg\">", "<img src=\"imgs/cello.jpg\">"],
-				vertical: false
-			});
-
-			$("#prevnext-spinner").irSpinner({
-				list: ["New York", "Paris", "Berlin", "Shanghai"],
-				vertical: false
+		<script type="text/javascript">
+			docInternalLoadJson("doc.json", function(data) {
+				irRequire.map = data.irRequire;
+				irRequire.map["showdown"] = "doc-internal/showdown.min.js";
+				docCtx = new DocContext(data);
+				docCtx.initialize();
 			});
 		</script>
 	</body>

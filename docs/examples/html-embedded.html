@@ -1,0 +1,15 @@
+<h2>Embedded HTML</h2>
+<div id="html-spinner" style="width: 600px; border: 1px solid black;"></div>
+
+<script>
+	irRequire(["jQuery", "$().irSpinner"], function() {
+		$("#html-spinner").irSpinner({
+			list: ["<img src=\"examples/imgs/fire.jpg\">",
+					"<img src=\"examples/imgs/boat.jpg\">",
+					"<img src=\"examples/imgs/tiger.jpg\">",
+					"<img src=\"examples/imgs/peppers.jpg\">",
+					"<img src=\"examples/imgs/cello.jpg\">"],
+			vertical: false
+		});
+	});
+</script>

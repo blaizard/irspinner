@@ -1,0 +1,14 @@
+{
+	"irRequire": {
+		"jQuery": "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js",
+		"$().irSpinner": ["dist/jquery.irspinner.min.js", "dist/jquery.irspinner.min.css"]
+	},
+	"pages" : [
+		["Description", "markdown", ["../README.md"]],
+		["Examples", "html", ["examples/vertical.html", "examples/horizontal.html", "examples/html-embedded.html", "examples/nextprevious.html"]],
+		["License", "text", ["../LICENSE.txt"]]
+	],
+	"title": "irSpinner",
+	"github": "https://github.com/blaizard/irspinner",
+	"download": ["dist/jquery.irspinner.min.js", "dist/jquery.irspinner.min.css"]
+}

@@ -1,0 +1,243 @@
+/* ==== Page layout ==== */
+
+html, body, .doc-wrap {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.doc-wrap {
+	flex-flow: row nowrap;
+	display: flex;
+}
+
+.doc-menu {
+	margin: 0px;
+	height: 100%;
+	flex-shrink: 0;
+	overflow: hidden;
+	display: block;
+
+}
+
+.doc-content {
+	height: 100%;
+	overflow-y: auto;
+	flex-shrink: 1;
+}
+
+/* ==== Documentation specific style ==== */
+
+.doc-menu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.doc-menu ul li {
+	cursor: pointer;
+}
+.doc-menu ul li:hover {
+	text-decoration: underline;
+}
+
+.doc-menu {
+	padding: 20px;
+}
+
+#doc-github {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#doc-download button {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.doc-content {
+	padding: 20px;
+}
+
+.doc-element-text {
+	white-space: pre-wrap;
+}
+
+/* ==== General elements style ==== */
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	word-wrap: break-word;
+	font-size: 16px;
+	line-height: 1.5
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*::selection {
+	background-color: rgba(0, 0, 0, 0.7);
+	color: #fff;
+}
+
+/* Paragraph */
+
+p {
+	line-height: 24px;
+	font-size: 16px;
+	margin: 0px 0px 24px;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6, legend {
+	display: block;
+	margin-top: 0px;
+	-webkit-margin-before: 0.83em;
+	-webkit-margin-after: 0.83em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+	color: #000;
+}
+
+h1 {
+	font-size: 30px;
+	margin: 30px 0;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 18px;
+}
+
+/* Blockquote */
+
+blockquote {
+	margin-left: 0px;
+	padding-left: 10px;
+	border-left: 2px solid #555;
+}
+
+/* Tables */
+table td {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+/* Lists */
+
+ul {
+	line-height: 22px;
+	margin-bottom: 24px;
+	list-style: disc;
+	margin: 0px;
+	padding: 0px;
+}
+
+li {
+	margin-left: 24px;
+	list-style: disc;
+	display: list-item;
+	text-align: left;
+	font-size: inherit;
+}
+
+li li {
+	list-style: circle;
+}
+
+/* Links */
+
+a {
+	color: #599;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a:hover {
+	color: #6cc;
+	text-decoration: none;
+}
+
+/* Code */
+
+code {
+	white-space: nowrap;
+	background: #ddd;
+	border: solid 1px #eee;
+	border-radius: 6px;
+	font-size: 80%;
+	padding: 2px 5px;
+	margin: 0 2px;
+	font-family: "Inconsolata","Consolata","Monaco",monospace;
+	overflow-x: auto;
+}
+
+/* Pre */
+
+pre {
+	padding: 5px 5px;
+	white-space: pre;
+	font-family: "Inconsolata","Consolata","Monaco",monospace;
+	font-size: 12px;
+	line-height: 1.5;
+	display: block;
+	color: rgb(64, 64, 64);
+	margin: 0px;
+	overflow: auto;
+	background: rgb(255, 255, 255);
+	margin: 1px 0px 24px;
+	border: 1px solid rgb(220, 220, 220);
+}
+
+/* Code blocks */
+
+pre > code {
+	white-space: inherit;
+	border: none;
+	font-size: 100%;
+	background: none;
+	margin: 0;
+	padding: 0;
+	font-family: "Inconsolata","Consolata","Monaco",monospace;
+	color: #444;
+	overflow-x: auto;
+}
+
+/* HR line */
+
+hr {
+	border: none;
+	border-bottom: 1px solid #999;
+	margin: 20px 0px;
+	padding: 0;
+}
+
+/* Button */
+
+button {
+	display: inline-block;
+	margin: 5px;
+	background-color: #5bbdbf;
+	padding: 10px 20px;
+	min-width: 50px;
+	color: #fff;
+	cursor: pointer;
+	border: none;
+	font: inherit;
+	box-shadow: 0 3px 5px 0 #888;
+}
+button:hover {
+	background-color: #6cc;
+}
