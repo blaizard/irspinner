@@ -170,7 +170,7 @@
 		$(this).data("irSpinner", options);
 
 		// Select the first element by default
-		$.fn.irSpinner.select.call(obj, 0);
+		$.fn.irSpinner.select.call(this, 0);
 		$(body).find("img").on("load", function() {
 			$(obj).irSpinner("resize", /*force*/true);
 		});

@@ -5,7 +5,7 @@
 	},
 	"pages" : [
 		["Description", "readme"],
-		["Examples", "html", ["examples/vertical.html", "examples/horizontal.html", "examples/html-embedded.html", "examples/nextprevious.html"]],
+		["Examples", "code", ["examples/vertical.html", "examples/horizontal.html", "examples/html-embedded.html", "examples/nextprevious.html", "examples/dateselector.html"]],
 		["License", "license"]
 	],
 	"title": "irSpinner",

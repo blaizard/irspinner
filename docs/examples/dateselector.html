@@ -1,0 +1,20 @@
+<h2>Date Selector</h2>
+<div style="border: 1px solid black;">
+	<div id="dateselector-day-spinner" style="display: inline-block; width: 80px; height: 100px; text-align: center;"></div>
+	<div id="dateselector-month-spinner" style="display: inline-block; width: 200px; height: 100px; text-align: center;"></div>
+	<div id="dateselector-year-spinner" style="display: inline-block; width: 100px; height: 100px; text-align: center;"></div>
+</div>
+
+<script type="text/javascript">
+	irRequire(["jQuery", "$().irSpinner"], function() {
+		$("#dateselector-day-spinner").irSpinner({
+			list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+		});
+		$("#dateselector-month-spinner").irSpinner({
+			list: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+		});
+		$("#dateselector-year-spinner").irSpinner({
+			list: [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
+		});
+	});
+</script>

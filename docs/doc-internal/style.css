@@ -65,6 +65,10 @@ html, body, .doc-wrap {
 	white-space: pre-wrap;
 }
 
+.doc-code-display {
+	margin-top: 20px;
+}
+
 /* ==== Loading animation ==== */
 
 .doc-loading {
@@ -183,7 +187,6 @@ li {
 	margin-left: 24px;
 	list-style: disc;
 	display: list-item;
-	text-align: left;
 	font-size: inherit;
 }
 

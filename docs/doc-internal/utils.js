@@ -184,7 +184,13 @@ DocContext.prototype.load = function (index) {
 		if (typeof urlList[curIndex] !== "undefined") {
 
 			var id = "doc-element-" + (DocContext.id++);
-			body.innerHTML += "<div id=\"" + id + "\" class=\"doc-element-" + type + "\">" + DocContext.loading() + "</div>";
+			{
+				var docElement = document.createElement("div");
+				docElement.setAttribute("id", id);
+				docElement.setAttribute("class", "doc-element-" + type);
+				docElement.innerHTML = DocContext.loading();
+				body.appendChild(docElement);
+			}
 
 			setTimeout(function() {
 				docInternalLoad(urlList[curIndex], function(data) {
@@ -192,20 +198,33 @@ DocContext.prototype.load = function (index) {
 						loadElement(curIndex + 1);
 					}
 
+					// If the element does not exists anymore it means that another page is being loaded, abort
+					var element = document.getElementById(id);
+					if (!element) {
+						return;
+					}
+
 					switch (type) {
-					case "html":
-						document.getElementById(id).innerHTML = data;
+					case "code":
+						element.innerHTML = "<div class=\"doc-code-run\">" + data + "</div>";
 						// Execute the scripts
-						var scriptTagList = [].slice.call(document.getElementById(id).getElementsByTagName("script"), 0);
+						var scriptTagList = [].slice.call(element.getElementsByTagName("script"), 0);
 						for (var i in scriptTagList) {
 							eval(scriptTagList[i].innerHTML);
+						}
+						// Show the code below
+						{
+							var codeElement = document.createElement("pre");
+							codeElement.setAttribute("class", "doc-code-display");
+							codeElement.innerHTML = data.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+							body.appendChild(codeElement);
 						}
 						callNext();
 						break;
 					case "markdown":
 						irRequire(["showdown"], function() {
 							var converter = new showdown.Converter();
-							document.getElementById(id).innerHTML = converter.makeHtml(data);
+							element.innerHTML = converter.makeHtml(data);
 							callNext();
 						});
 						break;
