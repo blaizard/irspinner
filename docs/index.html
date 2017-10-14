@@ -22,8 +22,6 @@
 
 		<script type="text/javascript">
 			docInternalLoadJson("doc.json", function(data) {
-				irRequire.map = data.irRequire;
-				irRequire.map["showdown"] = "doc-internal/showdown.min.js";
 				docCtx = new DocContext(data);
 				docCtx.initialize();
 			});

@@ -44,16 +44,74 @@ function docInternalLoadJson (url, callback)
 	});
 }
 
+var GitHub = function (userName, projectName) {
+	this.userName = userName;
+	this.projectName = projectName;
+}
+
+GitHub.prototype.getProjectLink = function () {
+	return "https://github.com/" + this.userName + "/" + this.projectName;
+}
+
+GitHub.prototype.getProjectDownloadLink = function () {
+	return this.getProjectLink() + "/zipball/master";
+}
+
+GitHub.prototype.getRawLink = function () {
+	return "https://raw.githubusercontent.com/" + this.userName + "/" + this.projectName + "/master";
+}
+
 var DocContext = function (config) {
+	this.local = (window.location.protocol.indexOf("file") == 0) ? true : false;
+
+	// If in local merge with local specific config
+	if (this.local && config.local) {
+		var merge = function (dest, toMerge) {
+			for (var key in toMerge) {
+				if (typeof dest[key] == "object") {
+					merge(dest[key], toMerge[key]);
+				}
+				else if (toMerge[key]) {
+					dest[key] = toMerge[key];
+				}
+			}
+		}
+		merge(config, config.local);
+	}
+
+	// Setup irRequire
+	irRequire.map = (config.irRequire) ? config.irRequire : {};
+	irRequire.map["showdown"] = "doc-internal/showdown.min.js";
+
+	this.title = (config.title) ? config.title : "";
+	this.github = (config.github) ? new GitHub(config.github[0], config.github[1]) : new GitHub();
+	this.download = (config.download) ? config.download : [];
 	this.pages = [];
 	if (typeof config.pages === "object") {
 		this.pages = config.pages;
+		// Assign specific pages if any
+		this.each(function(i, title, type, urlList) {
+			if (!urlList  || urlList.length == 0) {
+				switch (type) {
+				case "readme":
+					this.pages[i] = [title, "markdown", (this.local) ? "../README.md" : this.github.getRawLink() + "/README.md"];
+					break;
+				case "license":
+					this.pages[i] = [title, "text", (this.local) ? "../LICENSE.txt" : this.github.getRawLink() + "/LICENSE.txt"];
+					break;
+				default:
+					console.error("Unknown page type " + type);
+				}
+			}
+		});
 	}
-	this.title = (config.title) ? config.title : "";
-	this.github = (config.github) ? config.github : "";
-	this.download = (config.download) ? config.download : [];
-	DocContext.id = 0;
 }
+
+DocContext.id = 0;
+
+DocContext.loading = function() {
+	return "<div class=\"doc-loading\"></div>";
+};
 
 DocContext.prototype.initialize = function () {
 	// Set the title
@@ -64,8 +122,8 @@ DocContext.prototype.initialize = function () {
 	});
 	// Set the github info
 	if (this.github) {
-		document.getElementById("doc-github").innerHTML = "<a href=\"" + this.github + "\">View on GitHub</a>";
-		document.getElementById("doc-download").innerHTML = "<button onclick=\"location.href='" + this.github + "/zipball/master';\">Project ZIP File</button>";
+		document.getElementById("doc-github").innerHTML = "<a href=\"" + this.github.getProjectLink() + "\">View on GitHub</a>";
+		document.getElementById("doc-download").innerHTML = "<button onclick=\"location.href='" + this.github.getProjectDownloadLink() + "';\">Project ZIP File</button>";
 	}
 	// Set the download links
 	for (var i in this.download) {
@@ -102,14 +160,14 @@ DocContext.prototype.initialize = function () {
 
 DocContext.prototype.each = function (callback) {
 	for (var i in this.pages) {
-		callback(i, this.pages[i][0], this.pages[i][1], this.pages[i][2]);
+		callback.call(this, i, this.pages[i][0], this.pages[i][1], this.pages[i][2]);
 	}
 };
 
 DocContext.prototype.load = function (index) {
 	var title = this.pages[index][0];
 	var type = this.pages[index][1];
-	var urlList = this.pages[index][2];
+	var urlList = (typeof this.pages[index][2] === "object") ? this.pages[index][2] : [this.pages[index][2]];
 
 	if(history.pushState) {
 		history.pushState(null, null, "#" + title);
@@ -124,39 +182,42 @@ DocContext.prototype.load = function (index) {
 
 	var loadElement = function (curIndex) {
 		if (typeof urlList[curIndex] !== "undefined") {
-			docInternalLoad(urlList[curIndex], function(data) {
-				var id = "doc-element-" + (DocContext.id++);
-				body.innerHTML += "<div id=\"" + id + "\" class=\"doc-element-" + type + "\"></div>";
 
-				var callNext = function() {
-					loadElement(curIndex + 1);
-				}
+			var id = "doc-element-" + (DocContext.id++);
+			body.innerHTML += "<div id=\"" + id + "\" class=\"doc-element-" + type + "\">" + DocContext.loading() + "</div>";
 
-				switch (type) {
-				case "html":
-					document.getElementById(id).innerHTML = data;
-					// Execute the scripts
-					var scriptTagList = [].slice.call(document.getElementById(id).getElementsByTagName("script"), 0);
-					for (var i in scriptTagList) {
-						eval(scriptTagList[i].innerHTML);
+			setTimeout(function() {
+				docInternalLoad(urlList[curIndex], function(data) {
+					var callNext = function() {
+						loadElement(curIndex + 1);
 					}
-					callNext();
-					break;
-				case "markdown":
-					irRequire(["showdown"], function() {
-						var converter = new showdown.Converter();
-						document.getElementById(id).innerHTML = converter.makeHtml(data);
+
+					switch (type) {
+					case "html":
+						document.getElementById(id).innerHTML = data;
+						// Execute the scripts
+						var scriptTagList = [].slice.call(document.getElementById(id).getElementsByTagName("script"), 0);
+						for (var i in scriptTagList) {
+							eval(scriptTagList[i].innerHTML);
+						}
 						callNext();
-					});
-					break;
-				case "text":
-					document.getElementById(id).innerHTML = data;
-					callNext();
-					break;
-				default:
-					console.error("Unkown type " + type);
-				}
-			});
+						break;
+					case "markdown":
+						irRequire(["showdown"], function() {
+							var converter = new showdown.Converter();
+							document.getElementById(id).innerHTML = converter.makeHtml(data);
+							callNext();
+						});
+						break;
+					case "text":
+						document.getElementById(id).innerHTML = data;
+						callNext();
+						break;
+					default:
+						console.error("Unkown type " + type);
+					}
+				});
+			}, 1);
 		}
 	};
 	loadElement(0);

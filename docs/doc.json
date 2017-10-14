@@ -4,11 +4,16 @@
 		"$().irSpinner": ["dist/jquery.irspinner.min.js", "dist/jquery.irspinner.min.css"]
 	},
 	"pages" : [
-		["Description", "markdown", ["../README.md"]],
+		["Description", "readme"],
 		["Examples", "html", ["examples/vertical.html", "examples/horizontal.html", "examples/html-embedded.html", "examples/nextprevious.html"]],
-		["License", "text", ["../LICENSE.txt"]]
+		["License", "license"]
 	],
 	"title": "irSpinner",
-	"github": "https://github.com/blaizard/irspinner",
-	"download": ["dist/jquery.irspinner.min.js", "dist/jquery.irspinner.min.css"]
+	"github": ["blaizard", "irspinner"],
+	"download": ["dist/jquery.irspinner.min.js", "dist/jquery.irspinner.min.css"],
+	"local": {
+		"irRequire": {
+			"$().irSpinner": ["../srcs/jquery.irspinner.js", "../srcs/jquery.irspinner.css"]
+		}
+	}
 }

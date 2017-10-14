@@ -58,10 +58,44 @@ html, body, .doc-wrap {
 
 .doc-content {
 	padding: 20px;
+	min-width: 800px;
 }
 
 .doc-element-text {
 	white-space: pre-wrap;
+}
+
+/* ==== Loading animation ==== */
+
+.doc-loading {
+	width: 40px;
+	height: 40px;
+	background-color: #ccc;
+
+	margin: 100px auto;
+	-webkit-animation: doc-loading-rotateplane 1.2s infinite ease-in-out;
+	animation: doc-loading-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes doc-loading-rotateplane {
+	0% { -webkit-transform: perspective(120px) }
+	50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+	100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes doc-loading-rotateplane {
+	0% { 
+		transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+	}
+	50% { 
+		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+	}
+	100% { 
+		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+		-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	}
 }
 
 /* ==== General elements style ==== */
